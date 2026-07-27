@@ -1,0 +1,75 @@
+{
+    "keyboard_name": "LilPad",
+    "manufacturer": "taallens",
+    "maintainer": "taallens",
+
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+
+    "usb": {
+        "vid": "0xFEED",
+        "pid": "0x2040",
+        "device_version": "1.0.0"
+    },
+
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "encoder": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true
+    },
+
+    "matrix_pins": {
+        "direct": [
+            ["GP2", "GP3", "GP4"]
+        ]
+    },
+
+    "encoder": {
+        "rotary": [
+            {
+                "pin_a": "GP5",
+                "pin_b": "GP6",
+                "resolution": 4
+            },
+            {
+                "pin_a": "GP7",
+                "pin_b": "GP8",
+                "resolution": 4
+            },
+            {
+                "pin_a": "GP9",
+                "pin_b": "GP10",
+                "resolution": 4
+            }
+        ]
+    },
+
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {
+                    "label": "Encoder 1 Push",
+                    "matrix": [0, 0],
+                    "x": 0,
+                    "y": 1
+                },
+                {
+                    "label": "Encoder 2 Push",
+                    "matrix": [0, 1],
+                    "x": 2,
+                    "y": 1
+                },
+                {
+                    "label": "Encoder 3 Push",
+                    "matrix": [0, 2],
+                    "x": 4,
+                    "y": 1
+                }
+            ]
+        }
+    }
+}
