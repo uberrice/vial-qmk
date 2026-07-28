@@ -24,7 +24,7 @@
 
     "matrix_pins": {
         "direct": [
-            ["GP2", "GP3", "GP4"]
+            ["GP2", "GP3", "GP4", "GP27", "GP28", "GP29"]
         ]
     },
 
@@ -68,6 +68,24 @@
                     "matrix": [0, 2],
                     "x": 4,
                     "y": 1
+                },
+                {
+                    "label": "Key 1",
+                    "matrix": [0, 3],
+                    "x": 0,
+                    "y": 2
+                },
+                {
+                    "label": "Key 2",
+                    "matrix": [0, 4],
+                    "x": 2,
+                    "y": 2
+                },
+                {
+                    "label": "Key 3",
+                    "matrix": [0, 5],
+                    "x": 4,
+                    "y": 2
                 }
             ]
         }

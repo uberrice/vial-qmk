@@ -2,13 +2,13 @@
 
 enum layers { LAYER_BASE, LAYER_NAV, LAYER_MEDIA, LAYER_EXTRA };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[LAYER_BASE] = LAYOUT(KC_MUTE, KC_MPLY, MO(LAYER_NAV)),
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[LAYER_BASE] = LAYOUT(KC_MUTE, KC_MPLY, MO(LAYER_NAV), KC_NO, KC_NO, KC_NO),
 
-                                                              [LAYER_NAV] = LAYOUT(KC_ESC, KC_ENT, KC_TRNS),
+                                                              [LAYER_NAV] = LAYOUT(KC_ESC, KC_ENT, KC_TRNS, KC_NO, KC_NO, KC_NO),
 
-                                                              [LAYER_MEDIA] = LAYOUT(KC_MPRV, KC_MNXT, TO(LAYER_BASE)),
+                                                              [LAYER_MEDIA] = LAYOUT(KC_MPRV, KC_MNXT, TO(LAYER_BASE), KC_NO, KC_NO, KC_NO),
 
-                                                              [LAYER_EXTRA] = LAYOUT(KC_NO, KC_NO, TO(LAYER_BASE))};
+                                                              [LAYER_EXTRA] = LAYOUT(KC_NO, KC_NO, TO(LAYER_BASE), KC_NO, KC_NO, KC_NO)};
 
 #if defined(ENCODER_MAP_ENABLE)
 
