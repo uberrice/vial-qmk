@@ -3,6 +3,19 @@
 
 #include QMK_KEYBOARD_H
 
+#ifdef OLED_ENABLE
+void render_bongocat(void);
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_0;
+}
+
+bool oled_task_user(void) {
+    render_bongocat();
+    return false;
+}
+#endif
+
 enum sofle_layers {
     _QWERTY,
     _LOWER,

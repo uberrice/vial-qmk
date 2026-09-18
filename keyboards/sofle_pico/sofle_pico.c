@@ -6,7 +6,7 @@
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_kb(oled_rotation_t rotation) {
-    return OLED_ROTATION_90;
+    return oled_init_user(OLED_ROTATION_90);
 }
 
 static void render_logo(void) {
