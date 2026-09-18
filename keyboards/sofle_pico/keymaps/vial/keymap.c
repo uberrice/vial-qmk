@@ -4,14 +4,52 @@
 #include QMK_KEYBOARD_H
 
 #ifdef OLED_ENABLE
-void render_bongocat(void);
+#include OLED_FONT_H
+
+bool render_bongocat(void);
+
+static void render_vertical_status(char status[8]) {
+    const uint8_t x = OLED_DISPLAY_WIDTH - OLED_FONT_HEIGHT;
+    const uint8_t y = (OLED_DISPLAY_HEIGHT - 7 * OLED_FONT_WIDTH) / 2;
+
+    for (uint8_t column = 0; column < OLED_FONT_HEIGHT; ++column) {
+        for (uint8_t offset = 0; offset < 7 * OLED_FONT_WIDTH; ++offset) {
+            oled_write_pixel(x + column, y + offset, false);
+        }
+    }
+
+    for (uint8_t character = 0; character < 7; ++character) {
+        const uint8_t *glyph = &font[(status[character] - OLED_FONT_START) * OLED_FONT_WIDTH];
+        for (uint8_t column = 0; column < OLED_FONT_WIDTH; ++column) {
+            uint8_t pixels = pgm_read_byte(glyph + column);
+            for (uint8_t row = 0; row < OLED_FONT_HEIGHT; ++row) {
+                if (pixels & (1 << row)) {
+                    oled_write_pixel(x + row, y + 7 * OLED_FONT_WIDTH - 1 - (character * OLED_FONT_WIDTH + column), true);
+                }
+            }
+        }
+    }
+}
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return is_keyboard_left() ? OLED_ROTATION_0 : OLED_ROTATION_180;
 }
 
 bool oled_task_user(void) {
-    render_bongocat();
+    if (render_bongocat()) {
+        if (is_keyboard_left()) {
+            char status[] = "WPM 000";
+            uint8_t wpm   = get_current_wpm();
+            status[4]     = '0' + wpm / 100;
+            status[5]     = '0' + wpm / 10 % 10;
+            status[6]     = '0' + wpm % 10;
+            render_vertical_status(status);
+        } else {
+            char status[] = "LAYER 0";
+            status[6]     = '0' + get_highest_layer(layer_state | default_layer_state);
+            render_vertical_status(status);
+        }
+    }
     return false;
 }
 #endif

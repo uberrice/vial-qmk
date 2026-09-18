@@ -247,7 +247,7 @@ static void animate_cat(uint32_t interval) {
 }
 
 
-void render_bongocat(void) {
+bool render_bongocat(void) {
     static uint16_t frame_timer = 0;
     uint32_t  const input_timer = last_matrix_activity_time();
 
@@ -256,5 +256,7 @@ void render_bongocat(void) {
     } else if (timer_elapsed(frame_timer) > FRAME_DURATION) {
         frame_timer = timer_read();
         animate_cat(timer_elapsed32(input_timer));
+        return true;
     }
+    return false;
 }
