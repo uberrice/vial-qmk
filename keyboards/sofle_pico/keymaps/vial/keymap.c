@@ -9,7 +9,7 @@
 bool render_bongocat(void);
 
 static void render_vertical_status(char status[8]) {
-    const uint8_t x = OLED_DISPLAY_WIDTH - OLED_FONT_HEIGHT;
+    const uint8_t x = is_keyboard_left() ? OLED_DISPLAY_WIDTH - OLED_FONT_HEIGHT : 0;
     const uint8_t y = (OLED_DISPLAY_HEIGHT - 7 * OLED_FONT_WIDTH) / 2;
 
     for (uint8_t column = 0; column < OLED_FONT_HEIGHT; ++column) {
@@ -24,7 +24,11 @@ static void render_vertical_status(char status[8]) {
             uint8_t pixels = pgm_read_byte(glyph + column);
             for (uint8_t row = 0; row < OLED_FONT_HEIGHT; ++row) {
                 if (pixels & (1 << row)) {
-                    oled_write_pixel(x + row, y + 7 * OLED_FONT_WIDTH - 1 - (character * OLED_FONT_WIDTH + column), true);
+                    if (is_keyboard_left()) {
+                        oled_write_pixel(x + row, y + 7 * OLED_FONT_WIDTH - 1 - (character * OLED_FONT_WIDTH + column), true);
+                    } else {
+                        oled_write_pixel(x + OLED_FONT_HEIGHT - 1 - row, y + character * OLED_FONT_WIDTH + column, true);
+                    }
                 }
             }
         }
